@@ -179,11 +179,11 @@ header {
     max-width: 48px;
 }
 
-.shift-R { background: #dceafe; color: #245ca9; }
-.shift-O { background: #ffebd3; color: #a65b0b; }
-.shift-N { background: #e9e0ff; color: #6744b0; }
-.shift-V { background: #e3f5e9; color: #277b45; }
-.shift-D { background: #ffe0e5; color: #b33250; }
+.shift-R { background: #1508d4; color: #020305; }
+.shift-P { background: #e9d00c; color: #121506e0; }
+.shift-N { background: #c00e0e; color: #070202d5; }
+.shift-V { background: #0ae441; color: #080f09e2; }
+.shift-D { background: #0ae441; color: #090905e6; }
 
 .day-info {
     margin-top: 18px;
@@ -345,10 +345,10 @@ footer {
     <select id="shiftSelect">
         <option value="">Automatický graf</option>
         <option value="R">Ranní směna</option>
-        <option value="O">Odpolední směna</option>
         <option value="N">Noční směna</option>
         <option value="V">Volno</option>
         <option value="D">Dovolená</option>
+        <option value="P">Přesčas</option>
     </select>
 
     <label for="note">Poznámka k danému dni</label>
@@ -692,7 +692,7 @@ function showSelectedDay() {
 
     const shiftNames = {
         R:"Ranní směna",
-        O:"Odpolední směna",
+        P:"Přesčas",
         N:"Noční směna",
         V:"Volno",
         D:"Dovolená"
