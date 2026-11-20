@@ -153,6 +153,12 @@ header {
     border-color: #f4c5ce;
 }
 
+/* Zvýraznění klouzáku */
+.day.klouzak {
+    background: #e9f8ed;
+    border-color: #8bd3a0;
+}
+
 .holiday-name {
     display: block;
     width: fit-content;
@@ -338,7 +344,8 @@ footer {
         </div>
     <div class="muted" id="holidayInfo" style="margin-top:8px; color:#c03955;"></div>
     <div class="muted" id="nameDayInfo" style="margin-top:6px; color:#3478e5;"></div>
-        </div>
+    <div class="muted" id="klouzakInfo" style="margin-top:6px; color:#26934a; font-weight:bold;"></div>    
+       </div>
 
     <label for="shiftSelect">Pracovní směna</label>
 
@@ -394,6 +401,11 @@ const cycleWeeks = [
 const cycle = cycleWeeks.join("");
 const referenceDate = new Date(2026, 10, 19);
 const referenceCycleIndex = 24; // 19. 11. 2026 = 4. týden cyklu, 4. den (druhé N)
+
+// Ručně zadané termíny klouzáku
+const klouzakDates = [
+    "2026-12-02"
+];
 
 // Ruční změny mají přednost před automatickým grafem.
 let shiftOverrides = JSON.parse(localStorage.getItem("shiftOverrides") || "{}");
@@ -631,6 +643,7 @@ function renderCalendar() {
         const shift = getShift(cellDate);
         const holidayName = getHolidayName(cellDate);
         const nameDay = getNameDay(cellDate);
+        const isKlouzak = klouzakDates.includes(dateKey(cellDate));
         
         const cell = document.createElement("div");
         cell.className = "day";
@@ -642,6 +655,10 @@ if(isSelected) cell.classList.add("selected");
 if(holidayName && !isOther) {
     cell.classList.add("holiday");
     cell.title = holidayName;
+}
+
+if(isKlouzak && !isOther) {
+    cell.classList.add("klouzak");
 }
 
 const number = document.createElement("div");
@@ -709,6 +726,12 @@ const holiday = getHolidayName(selectedDate);
 document.getElementById("holidayInfo").textContent =
     holiday ? "🎉 " + holiday : "";
     
+// Zobrazení klouzáku
+const isKlouzak = klouzakDates.includes(dateKey(selectedDate));
+
+document.getElementById("klouzakInfo").textContent =
+    isKlouzak ? "🟢 KV – Klouzák" : "";
+
 // Zobrazení jmenin
 const nameDay = getNameDay(selectedDate);
 
